@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from 'react';
+import { Dimensions } from 'react-native';
 
-import MapView from 'react-native-maps';
+import MapView, { Marker } from 'react-native-maps';
 import { Accuracy, requestPermissionsAsync, watchPositionAsync } from 'expo-location';
 
-import { Container } from './styles';
+import Cover from '../../assets/sktpark-cover.png';
+
+import { 
+  Container,
+  ParkContainer,
+  CoverImage,
+  Type,
+  StyledMapView
+} from './styles';
 
 const Home = () => {
   const [location, setLocation] = useState({});
+
+  const { height } = Dimensions.get('window')
+  const COL_HEIGHT = height * 0.8;
 
   useEffect(() => {
     let subscriber;
@@ -35,15 +47,29 @@ const Home = () => {
 
   return (
     <Container>
-      <MapView 
-        style={{flex: 1,}}
-        region={{
-          latitude: location.latitude,
-          longitude: location.longitude,
-          latitudeDelta: 0.005,
-          longitudeDelta: 0.005
-        }}
-      />
+      {location.latitude && location.longitude && (
+        <StyledMapView
+          getHeight={COL_HEIGHT}
+          region={{
+            latitude: location.latitude,
+            longitude: location.longitude,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005
+        }}>
+          <Marker
+            style={{ width: 90, height: 70 }}
+            coordinate={{
+              latitude: location.latitude,
+              longitude: location.longitude,
+            }}
+          >
+            <ParkContainer>
+              <CoverImage style={{ resizeMode: 'cover' }} source={Cover} />
+              <Type>Skatepark</Type>
+            </ParkContainer>
+          </Marker>
+        </StyledMapView>
+      )}
     </Container>
   );
 }
