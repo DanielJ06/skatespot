@@ -1,17 +1,21 @@
 import React from 'react';
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 // Pages
 import Home from '../pages/Home';
 
-const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 const AppRoutes = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} />
-    </Tab.Navigator>
+    <Drawer.Navigator
+      screenOptions={{
+        headerShown: false
+      }}
+    >
+      <Drawer.Screen name="Home" component={Home} />
+    </Drawer.Navigator>
   )
 }
 
