@@ -1,21 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions } from 'react-native';
 
-import MapView, { Marker } from 'react-native-maps';
+import { Marker } from 'react-native-maps';
 import { Accuracy, requestPermissionsAsync, watchPositionAsync } from 'expo-location';
+import Icon from '@expo/vector-icons/Feather';
 
 import Cover from '../../assets/sktpark-cover.png';
+import Hamburguer from '../../components/hamburguer';
 
 import { 
   Container,
   ParkContainer,
   CoverImage,
   Type,
-  StyledMapView
+  StyledMapView,
+  HeaderContainer,
+  SelectArea
 } from './styles';
+import ToggleButton from '../../components/ToggleButton';
 
 const Home = () => {
   const [location, setLocation] = useState({});
+
+  const placeType = [
+    {id: 1, name: 'Pistas'},
+    {id: 2, name: 'Picos'}
+  ]
 
   const { height } = Dimensions.get('window')
   const COL_HEIGHT = height * 0.8;
@@ -47,6 +57,11 @@ const Home = () => {
 
   return (
     <Container>
+      <HeaderContainer>
+        <Hamburguer />
+        <Icon name="codepen" size={32} />
+        <Icon name="plus-square" size={27} />
+      </HeaderContainer>
       {location.latitude && location.longitude && (
         <StyledMapView
           getHeight={COL_HEIGHT}
@@ -70,6 +85,11 @@ const Home = () => {
           </Marker>
         </StyledMapView>
       )}
+      <SelectArea>
+        {placeType.map(type => (
+          <ToggleButton key={type.id} data={type} />
+        ))}
+      </SelectArea>
     </Container>
   );
 }

@@ -4,15 +4,16 @@ import colors from '../../enums/colors';
 
 export const Container = styled.View`
   flex: 1;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 0 25px;
   background-color: ${colors.white};
 `;
 
 export const StyledMapView = styled(MapView)`
   width: 100%;
-  height: ${props => `${props.getHeight}px`};
+  height: 60%;
   background-color: ${colors.grayLight};
 `;
 
@@ -33,5 +34,20 @@ export const CoverImage = styled.Image`
 
 export const Type = styled.Text`
   font-weight: bold;
-  color: ${colors.white}
+  color: ${colors.white};
 `;
+
+export const HeaderContainer = styled.View`
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+`;
+
+export const SelectArea = styled.View`
+  width: 100%;
+  margin-top: 25px;
+  flex-direction: row;
+  justify-content: space-around;
+`
