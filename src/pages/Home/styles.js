@@ -51,3 +51,7 @@ export const SelectArea = styled.View`
   flex-direction: row;
   justify-content: space-around;
 `
+export const CurrentContainer = styled.View`
+  align-items: center;
+  justify-content: center;
+`;

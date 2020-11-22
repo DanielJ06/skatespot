@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, Image, Text } from 'react-native';
 
-import { Marker } from 'react-native-maps';
+import { Marker, Callout } from 'react-native-maps';
 import { Accuracy, requestPermissionsAsync, watchPositionAsync } from 'expo-location';
 import Icon from '@expo/vector-icons/Feather';
 
 import Cover from '../../assets/sktpark-cover.png';
+import Pin from '../../assets/pin.png';
 import Hamburguer from '../../components/hamburguer';
+import ToggleButton from '../../components/ToggleButton';
+import placeType from '../../enums/placeType';
 
 import { 
   Container,
@@ -15,17 +18,12 @@ import {
   Type,
   StyledMapView,
   HeaderContainer,
-  SelectArea
+  SelectArea,
+  CurrentContainer
 } from './styles';
-import ToggleButton from '../../components/ToggleButton';
 
 const Home = () => {
   const [location, setLocation] = useState({});
-
-  const placeType = [
-    {id: 1, name: 'Pistas'},
-    {id: 2, name: 'Picos'}
-  ]
 
   const { height } = Dimensions.get('window')
   const COL_HEIGHT = height * 0.8;
@@ -72,16 +70,27 @@ const Home = () => {
             longitudeDelta: 0.005
         }}>
           <Marker
-            style={{ width: 90, height: 70 }}
             coordinate={{
-              latitude: location.latitude,
-              longitude: location.longitude,
+              latitude: -15.7470522,
+              longitude: -48.2665676,
             }}
           >
             <ParkContainer>
               <CoverImage style={{ resizeMode: 'cover' }} source={Cover} />
               <Type>Skatepark</Type>
             </ParkContainer>
+          </Marker>
+
+          <Marker coordinate={{
+            latitude: location.latitude,
+            longitude: location.longitude
+          }}>
+            <Image source={Pin}  />
+            <Callout  style={{ width: 150 }} >
+              <CurrentContainer>
+                <Text>Você está aqui</Text>
+              </CurrentContainer>
+            </Callout>
           </Marker>
         </StyledMapView>
       )}
