@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Image } from 'react-native';
 import colors from '../../enums/colors';
 
 import { Container, Title, Gradient } from './styles';
@@ -23,6 +24,7 @@ const ToggleButton = ({ data }) => {
         isSelected={selectedItems.includes(data.id) ? true : false}
         colors={[colors.orange, colors.lightOrange]}
       >
+        <Image style={{ marginBottom: 15 }} source={data.image} />
         <Title>{data.name}</Title>
       </Gradient>
     </Container>

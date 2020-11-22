@@ -14,6 +14,9 @@ export const Container = styled(RectButton)`
 export const Title = styled.Text`
   color: ${colors.white};
   font-weight: bold;
+  font-size: 18px;
+  position: absolute;
+  bottom: 12px;
 `;
 
 export const Gradient = styled(LinearGradient)`
